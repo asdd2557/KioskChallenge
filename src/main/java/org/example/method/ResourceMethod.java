@@ -5,10 +5,12 @@ import org.example.resource.MenuEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ResourceMethod {
     public SelectMethod selectMethod = new SelectMethod();
     public KioskResource kioskResource = new KioskResource();
+    Scanner scanner = new Scanner(System.in);
 
     /**
      * 카테고리 및 메뉴 선택 맵을 설정하고 초기화하는 메서드
@@ -18,7 +20,7 @@ public class ResourceMethod {
     public void menuOrCategorySelectAdd() {
         int menuCount = 0; // 카테고리와 메뉴를 구분하는 카운터 변수
         String menuCategorySwitch = ""; // 현재 카테고리 상태를 저장하는 변수
-
+        selectMethod.jobSelect();
         // ======================== 카테고리 선택 Map 초기화 ==========================
         for (MenuEnum menuEnum : MenuEnum.values()) { // 모든 메뉴를 순회
             List<Object> list = new ArrayList<>();
@@ -73,6 +75,7 @@ public class ResourceMethod {
 
     /**
      * 특정 카테고리에 속하는 메뉴를 메뉴 선택 맵에 설정하는 메서드
+     *
      * @param category 선택된 카테고리 이름
      */
     private void setupMenuSelectMap(String category) {

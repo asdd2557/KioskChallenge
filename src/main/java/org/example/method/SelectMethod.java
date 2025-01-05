@@ -10,9 +10,32 @@ public class SelectMethod {
 
     Scanner scanner = new Scanner(System.in); // 사용자 입력 처리
     ShowMethod showMethod = new ShowMethod(); // 출력 관련 메소드 관리
+    String job;
+
+    public void jobSelect() {
+        showMethod.showJob();
+        Scanner scanner = new Scanner(System.in);
+        int select =  scanner.nextInt();
+        switch (select) {
+            case 1:
+                job = "군인";
+                break;
+            case 2:
+                job = "학생";
+                break;
+            case 3:
+                System.exit(0); // 정상 종료
+                break;
+            default:
+                System.out.println("잘못 입력 하셨습니다.");
+                jobSelect();
+        }
+
+    }
 
     // 카테고리를 선택하고 해당 카테고리에 대한 메뉴를 보여주는 메소드
     public void categorySelect(Map<Integer, List<Object>> categorySelectMap) {
+
         // 현재 카테고리를 화면에 출력
         showMethod.showCategory();
 
@@ -56,6 +79,7 @@ public class SelectMethod {
         }
     }
 
+
     // 사용자가 선택한 메뉴를 장바구니에 추가하거나 취소하는 메소드
     public void cartSelect(MenuEnum menuEnum, List<MenuEnum> cartList) {
         System.out.println("위 메뉴를 장바구니에 추가하시겠습니까?");
@@ -68,7 +92,7 @@ public class SelectMethod {
             cartList.add(menuEnum);
 
             // 장바구니 내용을 화면에 출력
-            showMethod.showCart(cartList);
+            showMethod.showCart(cartList, job);
         } else if (select == 2) {
             // 취소 선택 시 아무 작업도 하지 않고 종료
             return;
@@ -99,7 +123,7 @@ public class SelectMethod {
             System.out.println("구입이 완료되었습니다.");
         } else if (select == 2) {
             // 장바구니 보기 선택 시 장바구니 내용을 출력
-            showMethod.showCart(cartList);
+            showMethod.showCart(cartList,job);
 
             // 장바구니에서 품목 삭제 기능 제공
             cartDeleteSelect(cartList);
@@ -125,7 +149,7 @@ public class SelectMethod {
             System.out.println();
 
             // 장바구니 내용을 출력
-            showMethod.showCart(cartList);
+            showMethod.showCart(cartList,job);
 
             // 사용자 입력을 받아 처리
             int select = scanner.nextInt();
@@ -140,7 +164,7 @@ public class SelectMethod {
             System.out.println();
 
             // 업데이트된 장바구니 내용을 출력
-            showMethod.showCart(cartList);
+            showMethod.showCart(cartList,job);
         } catch (Exception e) {
             // 잘못된 입력 처리
             System.out.println("숫자를 잘못 입력하셨습니다. 다시 입력해 주세요.");
